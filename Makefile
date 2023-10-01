@@ -4,8 +4,12 @@ DOCKER_HOME_DIR := /home/${DOCKER_USER_NAME}
 
 SHELL := /bin/bash
 
-# コンテナ実行
 run:
+	make _preExec -s
+	-docker container exec -it ${NAME} bash -c "./ghidraRun && bash"
+	make _postExec -s
+
+bash:
 	make _preExec -s
 	-docker container exec -it ${NAME} bash
 	make _postExec -s
